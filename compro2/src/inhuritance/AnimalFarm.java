@@ -17,7 +17,7 @@ class Animal {
     void eat(int feed) {
         if(this.curFood + feed <= maxFood) {
             this.curFood+= feed;
-        } else {
+        } else if (this.curFood < maxFood) {
             this.curFood = this.maxFood;
         }
     }
@@ -77,19 +77,19 @@ if(report.equals("All")) {
     }
 } else if (report.equals("Cow")) {
     for(int i=0;i<numAnimals;i++) {
-        if(animals[i].getClass().equals(Cow.class)) {
+        if(animals[i] instanceof Cow) {
             animals[i].printInfo();
         }
     }
 } else if (report.equals("Sheep")) {
     for(int i=0;i<numAnimals;i++) {
-        if(animals[i].getClass().equals(Sheep.class)) {
+        if(animals[i] instanceof Sheep) {
             animals[i].printInfo();
         }
     }
 } else if (report.equals("Other")) {
     for(int i=0;i<numAnimals;i++) {
-        if(!animals[i].getClass().equals(Sheep.class) && !animals[i].getClass().equals(Cow.class)) {
+        if(!(animals[i] instanceof Sheep) && !(animals[i] instanceof Cow)) {
             animals[i].printInfo();
         }
     }

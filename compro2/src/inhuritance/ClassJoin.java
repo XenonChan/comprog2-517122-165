@@ -10,7 +10,6 @@ class Component {
         this.model = model;
         this.socket = socket;
         this.memType = memType;
-        this.valid = isVaildSpec(model, socket, memType);
     }
 
     void printInfo() {
@@ -34,8 +33,13 @@ class CPU2 extends Component {
     CPU2(String model, int clocks, int socket, int memType) {
         super(model, socket, memType);
         this.clocks = clocks;
-        if(clocks <= 0) {
-            super.valid = false;
+        this.valid =  isVaildSpec(model, clocks, socket, memType);
+    }
+    boolean isVaildSpec(String model, int clocks, int socket, int memType) {
+        if(isVaildSpec(model, socket, memType) && clocks > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
     @Override
@@ -43,20 +47,13 @@ class CPU2 extends Component {
         super.printInfo();
         System.out.println(this.clocks);
     }
-
-    
 }
 
 class MainBoard2 extends Component {
     MainBoard2(String model, int socket, int memType) {
         super(model, socket, memType);
-
+        this.valid =  isVaildSpec(model, socket, memType);
     }
-    @Override
-    void printInfo() {
-        super.printInfo();
-    }
-
 }
 
 public class ClassJoin {
